@@ -26,25 +26,18 @@
                 @method('put')
                 @csrf
                 <h1 class="text-3xl font-base text-slate-700 mb-4">Detail Perbaikan</h1>
-                @if (session('message'))
-                <p class="mb-5 border py-2 px-3 w-full bg-green-400 rounded-md text-white">{{ session('message') }}</p>
-                @endif
                 <div class="border p-6 shadow-lg bg-slate-100 rounded-md pb-7">
                     <div class="flex flex-wrap gap-4 lg:flex-nowrap ">
                         <div class="w-full lg:w-1/2">
                             <label for="nama" class="block text-gray-700 text-sm font-bold mb-2">Nama:</label>
-                            <input @if ($perbaikan->status === "selesai")
-                            disabled
-                        @endif type="text" autofocus id="nama" value="{{ $perbaikan->nama }}" name="nama"
+                            <input type="text" autofocus id="nama" value="{{ $perbaikan->nama }}" name="nama"
                                 placeholder="Masukkan nama"
                                 class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
                         </div>
                         <div class="w-full lg:w-1/2">
                             <label for="no_handphone" class="block text-gray-700 text-sm font-bold mb-2">No. HP:</label>
-                            <input @if ($perbaikan->status === "selesai")
-                            disabled
-                        @endif type="number" id="no_handphone" name="no_handphone"
+                            <input type="number" id="no_handphone" name="no_handphone"
                                 value="{{ $perbaikan->no_handphone }}" placeholder="Masukkan nomor handphone"
                                 class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
@@ -52,9 +45,7 @@
                         <div class="w-full lg:w-1/2">
                             <label for="biaya_pengerjaan" class="block text-gray-700 text-sm font-bold mb-2">Biaya
                                 Pengerjaan:</label>
-                            <input @if ($perbaikan->status === "selesai")
-                            disabled
-                        @endif type="number" id="biaya_pengerjaan" name="biaya_pengerjaan"
+                            <input type="number" id="biaya_pengerjaan" name="biaya_pengerjaan"
                                 value="{{ $perbaikan->biaya_pengerjaan }}" placeholder="Masukkan biaya pengerjaan"
                                 class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
@@ -62,8 +53,7 @@
                         <div class="w-full lg:w-1/2">
                             <label for="kategori_id" class="block text-gray-700 text-sm font-bold mb-2">Jenis
                                 Barang:</label>
-                            <select @if ($perbaikan->status === 'selesai') disabled @endif name="kategori_id"
-                                class="w-full py-2.5 px-2">
+                            <select name="kategori_id" class="w-full py-2.5 px-2">
                                 <option value="1" @if ($perbaikan->kategori_id === 1) selected @endif>Handphone</option>
                                 <option value="2" @if ($perbaikan->kategori_id === 2) selected @endif>Laptop</option>
                             </select>
@@ -72,17 +62,16 @@
                     <div class="flex flex-wrap gap-4 lg:flex-nowrap mt-4">
                         <div class="w-full lg:w-1/2">
                             <label for="nama_barang" class="block text-gray-700 text-sm font-bold mb-2">Nama Barang:</label>
-                            <input @if ($perbaikan->status === 'selesai') disabled @endif type="text" autofocus
-                                id="nama_barang" name="nama_barang" value="{{ $perbaikan->nama_barang }}"
-                                placeholder="Masukkan jenis barang"
+                            <input type="text" autofocus id="nama_barang" name="nama_barang"
+                                value="{{ $perbaikan->nama_barang }}" placeholder="Masukkan jenis barang"
                                 class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
                         </div>
 
                         <div class="w-full lg:w-1/2">
                             <label for="kerusakan" class="block text-gray-700 text-sm font-bold mb-2">Kerusakan:</label>
-                            <input @if ($perbaikan->status === 'selesai') disabled @endif type="text" id="kerusakan"
-                                name="kerusakan" placeholder="Masukkan kerusakan" value="{{ $perbaikan->kerusakan }}"
+                            <input type="text" id="kerusakan" name="kerusakan" placeholder="Masukkan kerusakan"
+                                value="{{ $perbaikan->kerusakan }}"
                                 class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
                         </div>
@@ -90,9 +79,8 @@
                         <div class="w-full lg:w-1/2">
                             <label for="tanggal_selesai" class="block text-gray-700 text-sm font-bold mb-2">Tanggal
                                 Selesai:</label>
-                            <input @if ($perbaikan->status === 'selesai') disabled @endif type="date" id="tanggal_selesai"
-                                name="tanggal_selesai" placeholder="Masukkan tanggal_selesai"
-                                value="{{ $perbaikan->tanggal_selesai }}"
+                            <input type="date" id="tanggal_selesai" name="tanggal_selesai"
+                                placeholder="Masukkan tanggal_selesai" value="{{ $perbaikan->tanggal_selesai }}"
                                 class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>
                         </div>
@@ -102,26 +90,24 @@
                         <div class="w-full">
                             <label for="deskripsi" class="block text-gray-700 text-sm font-bold mb-2">Kelengkapan
                                 Barang:</label>
-                            <textarea @if ($perbaikan->status === 'selesai') disabled @endif type="text" cols="5" rows="5" autofocus
-                                id="deskripsi" name="deskripsi" placeholder="Masukkan kelengkapan barang"
+                            <textarea type="text" cols="5" rows="5" autofocus id="deskripsi" name="deskripsi"
+                                placeholder="Masukkan kelengkapan barang"
                                 class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 required>{{ $perbaikan->deskripsi }}</textarea>
                         </div>
                     </div>
                     <div class="w-full mb-6">
                         <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Status Perbaikan:</label>
-                        <select name="status" @if ($perbaikan->status === 'selesai') disabled @endif class="w-full py-2.5 px-2">
+                        <select name="status" class="w-full py-2.5 px-2">
                             <option value="proses" @if ($perbaikan->status === 'proses') selected @endif>Proses</option>
                             <option value="selesai" @if ($perbaikan->status === 'selesai') selected @endif>Selesai</option>
                             <option value="tidak bisa" @if ($perbaikan->status === 'tidak bisa') selected @endif>Tidak bisa
                             </option>
                         </select>
                     </div>
-                    @if ($perbaikan->status !== 'selesai')
-                        <button id="submit-button" type="submit"
-                            class="border p-2 px-4 py-2 rounded-md bg-slate-700 text-white"><i
-                                class="fas fa-save mr-1"></i>Update</button>
-                    @endif
+                    <button id="submit-button" type="submit"
+                        class="border p-2 px-4 py-2 rounded-md bg-slate-700 text-white"><i
+                            class="fas fa-save mr-1"></i>Update</button>
                     <a href="{{ route('daftar-perbaikan.index') }}"
                         class="border p-2 px-4 py-3 rounded-md bg-indigo-700 text-white"><i
                             class="fas fa-arrow-left mr-1"></i>Kembali</a>
@@ -129,6 +115,15 @@
             </form>
         </div>
     </div>
+    @if (session('message'))
+        <script>
+            Swal.fire({
+                title: "Good job!",
+                text: "{{ session('message') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
 @endsection
 @push('scripts')
     <script>

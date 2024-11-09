@@ -62,7 +62,7 @@ class DaftarPerbaikanController extends Controller
     {
         $perbaikan = DaftarPerbaikan::findOrFail($id);
         return view('admin.daftar-perbaikan.show', compact('perbaikan'));
-    } 
+    }
 
     /**
      * Update the specified resource in storage.
@@ -79,7 +79,7 @@ class DaftarPerbaikanController extends Controller
             'tanggal_selesai' => 'required',
             'deskripsi' => 'required',
         ]);
-        
+
         $perbaikan = DaftarPerbaikan::findOrFail($id);
         $perbaikan->nama = $request->nama;
         $perbaikan->no_handphone = $request->no_handphone;
@@ -93,15 +93,19 @@ class DaftarPerbaikanController extends Controller
         $perbaikan->save();
 
         return back()->with([
-            'message' => 'Data perbaikan berhasil diperbaharui'
+            'message' => 'Data perbaikan berhasil diperbaharui',
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $perbaikan = DaftarPerbaikan::findOrFail($id);
+        $perbaikan->delete();
+        return back()->with([
+            'message' => 'Data berhasil dihapus',
+        ]);
     }
 }

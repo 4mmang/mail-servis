@@ -57,14 +57,23 @@
                                         </span>
                                     </td>
                                     <td class="whitespace-nowrap">
-                                        <a target="_blank" href="{{ url('/nota/pdf/' . $perbaikan->id) }}"
-                                            class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">
-                                            Cetak
-                                        </a>
-                                        <a target="_blank" href="{{ route('daftar-perbaikan.show', $perbaikan->id) }}"
-                                            class="inline-block rounded bg-yellow-500 px-4 py-2 text-xs font-medium text-white hover:bg-yellow-600">
-                                            Detail
-                                        </a>
+                                        <form action="{{ route('daftar-perbaikan.destroy', $perbaikan->id) }}"
+                                            method="post" id="delete-form-{{ $perbaikan->id }}">
+                                            @csrf
+                                            @method('delete')
+                                            <a target="_blank" href="{{ url('/nota/pdf/' . $perbaikan->id) }}"
+                                                class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">
+                                                Cetak
+                                            </a>
+                                            <a target="_blank" href="{{ route('daftar-perbaikan.show', $perbaikan->id) }}"
+                                                class="inline-block rounded bg-yellow-500 px-4 py-2 text-xs font-medium text-white hover:bg-yellow-600">
+                                                Detail
+                                            </a>
+                                            <button type="submit" onclick="disableDeleteButton({{ $perbaikan->id }})"
+                                                class="inline-block rounded bg-red-500 px-4 py-2 text-xs font-medium text-white hover:bg-red-600">
+                                                Hapus
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -76,4 +85,23 @@
             <!--/container-->
         </div>
     </div>
+    @if (session('message'))
+        <script>
+            Swal.fire({
+                title: "Good job!",
+                text: "{{ session('message') }}",
+                icon: "success"
+            });
+        </script>
+    @endif
 @endsection
+@push('scripts')
+    <script>
+        function disableDeleteButton(id) {
+            const button = document.querySelector(`#delete-form-${id} button`);
+            button.disabled = true;
+            button.textContent = 'Menghapus...'; // Opsional: Ubah teks tombol saat diklik
+            document.querySelector(`#delete-form-${id}`).submit(); // Kirim form
+        }
+    </script>
+@endpush
