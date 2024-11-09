@@ -49,9 +49,8 @@ class DaftarPerbaikanController extends Controller
         $perbaikan->kerusakan = $request->kerusakan;
         $perbaikan->tanggal_selesai = $request->tanggal_selesai;
         $perbaikan->deskripsi = $request->deskripsi;
-        $perbaikan->waktu_masuk = now();
+        $perbaikan->waktu_masuk = \Carbon\Carbon::now('Asia/Makassar');
         $perbaikan->save();
-
         return redirect()->route('nota.pdf', $perbaikan->id);
     }
 
