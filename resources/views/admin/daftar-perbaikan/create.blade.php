@@ -88,11 +88,10 @@
 
                         <div class="w-full lg:w-1/2">
                             <label for="tanggal_selesai" class="block text-gray-700 text-sm font-bold mb-2">Tanggal
-                                Selesai:</label>
+                                Selesai (Opsional)</label>
                             <input type="date" id="tanggal_selesai" name="tanggal_selesai"
                                 placeholder="Masukkan tanggal_selesai"
-                                class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>
+                                class="shadow w-full valid:border-green-500 appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                     </div>
 

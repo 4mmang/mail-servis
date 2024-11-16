@@ -36,7 +36,7 @@ class DaftarPerbaikanController extends Controller
             'kategori_id' => 'required',
             'nama_barang' => 'required',
             'kerusakan' => 'required',
-            'tanggal_selesai' => 'required',
+            'tanggal_selesai' => 'nullable',
             'deskripsi' => 'required',
         ]);
 
