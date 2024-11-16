@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <th>Tanggal Selesai</th>
-            <td>: {{ $tanggal_selesai }}</td>
+            <td>: {{ $tanggal_selesai ?? '-' }}</td>
         </tr>
         <tr>
             <th>Deskripsi</th>
