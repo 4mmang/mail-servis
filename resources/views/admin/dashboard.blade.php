@@ -20,15 +20,22 @@
                 </ul>
             </div>
         </nav>
-    
+
         <div class="flex-1 p-6 bg-gray-100 overflow-y-auto">
             <h1 class="text-3xl font-base text-slate-700">Dashboard Admin</h1>
-    
+
             <div class="container">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     <div class="bg-white shadow-lg rounded-lg p-6 mt-6">
-                        <h6 class="text-md font-semibold text-slate-700">Pendapatan</h6>
-                        <p class="text-4xl font-bold text-slate-700 mt-4">{{ 'Rp ' . number_format($pendapatan, 0, ',', '.') }}
+                        <h6 class="text-md font-semibold text-slate-700">Total Pendapatan</h6>
+                        <p class="text-4xl font-bold text-slate-700 mt-4">
+                            {{ 'Rp ' . number_format($pendapatan, 0, ',', '.') }}
+                        </p>
+                    </div>
+                    <div class="bg-white shadow-lg rounded-lg p-6 mt-6">
+                        <h6 class="text-md font-semibold text-slate-700">Pendapatan Buulan Ini</h6>
+                        <p class="text-4xl font-bold text-slate-700 mt-4">
+                            {{ 'Rp ' . number_format($pendapatanBulanIni, 0, ',', '.') }}
                         </p>
                     </div>
                     <div class="bg-white shadow-lg rounded-lg p-6 mt-6">
@@ -47,7 +54,67 @@
                         </p>
                     </div>
                 </div>
+                <canvas id="myLineChart" class="mt-10" style="height: 300px; width: 100%"></canvas>
             </div>
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var line = document.getElementById('myLineChart').getContext('2d');
+        const pendapatanSetahunTerakhir = @json($pendapatanSetahunTerakhir);
+        const labels = @json($labels);
+        var myLineChart = new Chart(line, {
+            type: 'line',
+            data: {
+                labels: labels, // Gunakan label dinamis
+                datasets: [{
+                    label: ' Total Pendapatan',
+                    data: pendapatanSetahunTerakhir,
+                    fill: false,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1.5,
+                    tension: 0.1,
+                    pointStyle: 'circle',
+                }, ]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Grafik Total Pendapatan Dalam Setahun Terakhir'
+                    },
+                    legend: {
+                        labels: {
+                            usePointStyle: true, // Ubah ikon legenda menjadi bulat
+                            pointStyle: 'circle', // Pastikan bentuknya lingkaran
+                        }
+                    }
+                },
+                animations: {
+                    tension: {
+                        duration: 2000,
+                        easing: 'linear',
+                        from: 1,
+                        to: 0,
+                        loop: true
+                    }
+                },
+                scales: {
+                    y: {
+                        responsive: true,
+                        maintainAspectRatio: false, // Menjaga tinggi chart
+                        beginAtZero: true,
+                        // ticks: {
+                        //     stepSize: 1, // Kenaikan 1 per langkah
+                        //     callback: function(value) {
+                        //         return Number.isInteger(value) ? value : null; // Hanya tampilkan bilangan bulat
+                        //     }
+                        // }
+                    }
+                }
+            }
+        });
+    </script>
+@endpush

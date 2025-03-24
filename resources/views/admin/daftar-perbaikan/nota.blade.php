@@ -61,6 +61,7 @@
     <p class="text-center mt-4 text-sm">HARAP CEK BAIK - BAIK LAPTOP/HP ANDA SEBELUM KELUAR DARI TOKO
         KAMI, KLAIM KERUSAKAN SETELAH KELUAR DARI TOKO KAMI TIDAK
         DAPAT KAMI LAYANI.</p>
+        <p class="text-center mt-2 text-danger">#Tidak Ada Garansi Hardware</p>
     <hr class="mt-4">
     <p class="text-center">Terimakasih</p>
 </body>
